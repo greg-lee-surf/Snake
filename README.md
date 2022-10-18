@@ -2,4 +2,4 @@
 A classic snake game in C++ in a linux terminal.
 
 # Project class diagram (UML)
-![alt text](https://github.com/greg-lee-surf/Snake/ClassDiagram)
+![alt text](https://github.com/greg-lee-surf/Snake/ClassDiagram.png)
