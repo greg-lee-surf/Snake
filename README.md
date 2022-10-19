@@ -1,4 +1,4 @@
-# Snake
+# Snake C/C++
 A classic snake game in C++ in a linux terminal.
 
 # Project class diagram (UML)
