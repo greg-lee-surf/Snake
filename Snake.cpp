@@ -5,68 +5,68 @@
 #include "Environment.hpp"
 
 Snake::Snake() {
-    snakeDirection = Right;
-    snakeSize = 5;
-    snakePosition.push_back(WIDTH*(HEIGHT/2) + WIDTH/2);
-    for (int i = 0; i < snakeSize; i++) {
-        snakePosition.push_back(snakePosition[i] - 1);
+    direction = Right;
+    size = 5;
+    position.push_back(WIDTH*(HEIGHT/2) + WIDTH/2);
+    for (int i = 0; i < size - 1; i++) {
+        position.push_back(position[i] - 1);
     }
 }
 
 Snake::~Snake() {
 }
 
-void Snake::Spawn() {}
-
-void Snake::Grow() {}
-
 void Snake::Direction() {
     bufferPosition = SavePreviousPos();
     UpdateDir(); 
-    if (snakeDirection == Right) {
+    if (direction == Right) {
         MoveRight();
-    } else if (snakeDirection == Left) {
+    } else if (direction == Left) {
         MoveLeft();
-    } else if (snakeDirection == Up) {
+    } else if (direction == Up) {
         MoveUp();
-    } else if (snakeDirection == Down) {
+    } else if (direction == Down) {
         MoveDown();
     }
     UpdatePos();
 }
 
 void Snake::MoveRight() {
-    snakePosition.at(0) = snakePosition.at(0) + 1;
+    position.at(0) = position.at(0) + 1;
 }
 
 void Snake::MoveLeft() {
-    snakePosition.at(0) = snakePosition.at(0) - 1;
+    position.at(0) = position.at(0) - 1;
 }
 
 void Snake::MoveUp() {
-    snakePosition.at(0) = snakePosition.at(0) - WIDTH;
+    position.at(0) = position.at(0) - WIDTH;
 }
 
 void Snake::MoveDown() {
     bufferPosition = SavePreviousPos();
-    snakePosition.at(0) = snakePosition.at(0) + WIDTH;
+    position.at(0) = position.at(0) + WIDTH;
 }
 
 
-void Snake::Die() {}
+void Snake::Die() {
+}
 
 std::vector<int> Snake::SavePreviousPos() {
     std::vector<int> buffer;
-    buffer.resize(snakePosition.size());
-    for (int i = 0; i < snakeSize; i++) {
-        buffer.at(i) = snakePosition.at(i);
+    buffer.resize(position.size());
+    for (int i = 0; i < size; i++) {
+        buffer.at(i) = position.at(i);
     }
     return buffer;
 }
 
 void Snake::UpdatePos() {
-    for (int i = 0; i < snakeSize - 1; i++) {
-        snakePosition.at(i+1) = bufferPosition.at(i);
+    for (int i = 0; i < size - 1; i++) {
+        position.at(i+1) = bufferPosition.at(i);
+    }
+    if (isGrowing) {
+        position.push_back(bufferPosition.at(size - 1)); // Growing snake
     }
 }
 
@@ -76,16 +76,16 @@ void Snake::UpdateDir() {
             getch(); // skip the [
             switch(getch()) { // the real value
                 case 'A':
-                    snakeDirection = Up;// code for arrow up
+                    direction = Up;// code for arrow up
                     break;
                 case 'B':
-                    snakeDirection = Down; // code for arrow down
+                    direction = Down; // code for arrow down
                     break;
                 case 'C':
-                    snakeDirection = Right; // code for arrow right
+                    direction = Right; // code for arrow right
                     break;
                 case 'D':
-                    snakeDirection = Left;// code for arrow left
+                    direction = Left;// code for arrow left
                     break;
             }
         }

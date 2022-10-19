@@ -16,16 +16,15 @@ public:
     std::array<char,WIDTH*HEIGHT> window;
     std::vector<int> playerLocation;
     std::vector<int> appleLocation;
-    int whiteSpace; // Amount of white space in the window (to spawn the apple)
     
     // Methods
     Environment();
     ~Environment();
 
     void AddSnake(Snake *snake);
-    void AddApple();
+    void AddApple(Apple *apple, Snake *snake);
     void ClearWindow();
-    void RefreshScreen(Snake *snake);
+    void RefreshScreen(Snake *snake, Apple *apple);
 
 private:
     bool PlayerOutOfBound(); 

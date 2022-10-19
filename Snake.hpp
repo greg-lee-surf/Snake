@@ -6,12 +6,12 @@
 class Snake{
 public:   
     // Attributs
-    enum dir {Right, Left, Up, Down} snakeDirection;
-    std::string snakeName; // Player name
-    unsigned short snakeSize; // The score/size of the snake
-    std::vector<int> snakePosition; // Head is snakePosition[0]
+    enum dir {Right, Left, Up, Down} direction;
+    std::string name; // Player name
+    unsigned short size; // The score/size of the snake
+    std::vector<int> position; // Head is position[0]
     std::vector<int> bufferPosition; // Buffer for moving the snake
-
+    bool isGrowing = false; // If the snake just ate an apple, he is growing
 
     // Methods
     // Constructors
@@ -24,8 +24,6 @@ public:
 
     // Public methods
 public:
-    void Spawn();
-    void Grow();
     void Direction();
     void MoveRight();
     void MoveLeft();
