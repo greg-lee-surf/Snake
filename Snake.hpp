@@ -1,22 +1,19 @@
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 #include <vector>
-#include <string>
-#include <array>
 
 class Snake{
-    
+public:   
     // Attributs
-    std::string name; // Player name
-    unsigned short size; // The score/size of the snake
-    std::vector<unsigned short> snakePosition;
+    enum dir {Right, Left, Up, Down} snakeDirection;
+    std::string snakeName; // Player name
+    unsigned short snakeSize; // The score/size of the snake
+    std::vector<int> snakePosition; // Head is snakePosition[0]
+    std::vector<int> bufferPosition; // Buffer for moving the snake
+
 
     // Methods
-    
     // Constructors
     Snake();
     Snake(std::string _name);
@@ -35,6 +32,11 @@ public:
     void MoveUp();
     void MoveDown();
     void Die();
+
+private:
+    std::vector<int> SavePreviousPos();
+    void UpdatePos();
+    void UpdateDir();
 };
 
 
