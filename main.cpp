@@ -7,8 +7,6 @@
 #include "Snake.hpp"
 #include "Environment.hpp"
 
-#define WIDTH 60
-#define HEIGHT 20
 
 int main() {
     Snake *snake = new Snake();
@@ -16,11 +14,12 @@ int main() {
     Environment *env = new Environment();
     env->AddSnake(snake);
     env->AddApple(apple, snake);
-    while (true) {
+    while (env->keepPlaying) {
         env->RefreshScreen(snake, apple);
         usleep(10e4);
     }
 
+    std::cout << "\nYou lost, loooooooser!" << std::endl;
 
     return 0;
 }

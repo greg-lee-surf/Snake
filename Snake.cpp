@@ -17,6 +17,7 @@ Snake::~Snake() {
 }
 
 void Snake::Direction() {
+    Eat(); // Is the snake eating?
     bufferPosition = SavePreviousPos();
     UpdateDir(); 
     if (direction == Right) {
@@ -44,12 +45,17 @@ void Snake::MoveUp() {
 }
 
 void Snake::MoveDown() {
-    bufferPosition = SavePreviousPos();
     position.at(0) = position.at(0) + WIDTH;
 }
 
 
-void Snake::Die() {
+bool Snake::Die() {
+    for (auto body {std::begin(position) + 1}; body != std::end(position); body++) {
+        if (*body == position.front()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 std::vector<int> Snake::SavePreviousPos() {
@@ -65,8 +71,13 @@ void Snake::UpdatePos() {
     for (int i = 0; i < size - 1; i++) {
         position.at(i+1) = bufferPosition.at(i);
     }
-    if (isGrowing) {
-        position.push_back(bufferPosition.at(size - 1)); // Growing snake
+}
+
+void Snake::Eat() {
+    if(isEating == true) {
+        size++;
+        position.push_back(*position.end());
+        isEating = false;
     }
 }
 
@@ -76,17 +87,25 @@ void Snake::UpdateDir() {
             getch(); // skip the [
             switch(getch()) { // the real value
                 case 'A':
-                    direction = Up;// code for arrow up
-                    break;
+                    if (direction != Down) {
+                        direction = Up;// code for arrow up
+                        break;
+                    }
                 case 'B':
-                    direction = Down; // code for arrow down
-                    break;
+                    if (direction != Up) {
+                        direction = Down; // code for arrow down
+                        break;
+                    }
                 case 'C':
-                    direction = Right; // code for arrow right
-                    break;
+                    if (direction != Left) {
+                        direction = Right; // code for arrow right
+                        break;
+                    }
                 case 'D':
-                    direction = Left;// code for arrow left
-                    break;
+                    if (direction != Right) {
+                        direction = Left; // code for arrow left
+                        break;
+                    }
             }
         }
     }

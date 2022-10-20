@@ -2,11 +2,11 @@
 #define APPLE_HPP
 
 class Apple {
-
-    int applePosition;
 public:
+    int applePosition;
     Apple();
-    ~Apple();
+    //~Apple();
+    void Respawn();
     int getApplePosition();
 };
 

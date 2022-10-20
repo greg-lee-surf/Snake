@@ -6,6 +6,10 @@ Apple::Apple() {
     applePosition = rand();
 }
 
+void Apple::Respawn() {
+    applePosition = rand();
+}
+
 int Apple::getApplePosition() {
     return applePosition;
 }

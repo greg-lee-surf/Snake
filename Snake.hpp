@@ -11,7 +11,7 @@ public:
     unsigned short size; // The score/size of the snake
     std::vector<int> position; // Head is position[0]
     std::vector<int> bufferPosition; // Buffer for moving the snake
-    bool isGrowing = false; // If the snake just ate an apple, he is growing
+    bool isEating = false; // If the snake just ate an apple, he is growing
 
     // Methods
     // Constructors
@@ -29,7 +29,9 @@ public:
     void MoveLeft();
     void MoveUp();
     void MoveDown();
-    void Die();
+    void Eat();
+    bool Die();
+
 
 private:
     std::vector<int> SavePreviousPos();
