@@ -49,15 +49,6 @@ void Snake::MoveDown() {
 }
 
 
-bool Snake::Die() {
-    for (auto body {std::begin(position) + 1}; body != std::end(position); body++) {
-        if (*body == position.front()) {
-            return true;
-        }
-    }
-    return false;
-}
-
 std::vector<int> Snake::SavePreviousPos() {
     std::vector<int> buffer;
     buffer.resize(position.size());
@@ -74,12 +65,72 @@ void Snake::UpdatePos() {
 }
 
 void Snake::Eat() {
-    if(isEating == true) {
-        size++;
+    if(getEatingState() == true) {
+        setSize(getSize() + 1);
         position.push_back(*position.end());
         isEating = false;
     }
 }
+
+bool Snake::Die() {
+    for (auto body {std::begin(position) + 1}; body != std::end(position); body++) {
+        if (*body == position.front()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Setters
+void Snake::setDirection(dir _direction) {
+    direction = _direction;
+}
+void Snake::setName(std::string _name) {
+    name = _name;
+}
+
+void Snake::setSize(unsigned short _size) {
+    size = _size;
+}
+
+void Snake::setPosition(std::vector<int> _position) {
+    position = _position;
+}
+
+void Snake::setBufferPosition(std::vector<int> _bufferPosition) {
+    bufferPosition = _bufferPosition;
+}
+
+void Snake::setEatingState(bool _isEating) {
+    isEating = _isEating;
+}
+
+
+// Getters
+Snake::dir Snake::getDirection() {
+    return direction;
+}
+
+std::string Snake::getName() {
+    return name;
+}
+
+unsigned short Snake::getSize() {
+    return size;
+}
+
+std::vector<int> Snake::getPosition() {
+    return position;
+}
+
+std::vector<int> Snake::getBufferPosition() {
+    return bufferPosition;
+}
+
+bool Snake::getEatingState() {
+    return isEating;
+}
+
 
 void Snake::UpdateDir() {
     if (_kbhit()) { // something is happening !!

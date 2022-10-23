@@ -4,7 +4,7 @@
 #include <vector>
 
 class Snake{
-public:   
+
     // Attributs
     enum dir {Right, Left, Up, Down} direction;
     std::string name; // Player name
@@ -14,16 +14,15 @@ public:
     bool isEating = false; // If the snake just ate an apple, he is growing
 
     // Methods
+public:
     // Constructors
     Snake();
     Snake(std::string _name);
     Snake(std::string _name, int _size);
 
-    // Destructors
+    // Destructor
     ~Snake();
 
-    // Public methods
-public:
     void Direction();
     void MoveRight();
     void MoveLeft();
@@ -32,12 +31,26 @@ public:
     void Eat();
     bool Die();
 
+    // Setters
+    void setDirection(dir _direction);
+    void setName(std::string _name);
+    void setSize(unsigned short _size);
+    void setPosition(std::vector<int> _position);
+    void setBufferPosition(std::vector<int> _bufferPosition);
+    void setEatingState(bool _isEating);
+
+    // Getters
+    dir getDirection();
+    std::string getName();
+    unsigned short getSize();
+    std::vector<int> getPosition();
+    std::vector<int> getBufferPosition();
+    bool getEatingState();
 
 private:
     std::vector<int> SavePreviousPos();
     void UpdatePos();
     void UpdateDir();
 };
-
 
 #endif

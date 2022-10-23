@@ -2,12 +2,16 @@
 #define APPLE_HPP
 
 class Apple {
+    // Attributs
+    int position;
+
+    // Methods
 public:
-    int applePosition;
     Apple();
     //~Apple();
     void Respawn();
-    int getApplePosition();
+    int getPosition();
+    void setPosition(int _position);
 };
 
 #endif

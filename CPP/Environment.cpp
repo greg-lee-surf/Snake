@@ -12,15 +12,15 @@ Environment::~Environment() {
 }
 
 void Environment::AddSnake(Snake *snake) {
-    for (auto const el: snake->position) {
+    for (auto const el: snake->getPosition()) {
         window[el] = 'X';
     }
-    window[snake->position.at(0)] = '0';
+    window[snake->getPosition().at(0)] = '0';
 }
 
 void Environment::SnakeEatsApple(Snake *snake, Apple *apple) {
-    if (apple->getApplePosition() % (WIDTH*HEIGHT) == snake->position.at(0)) {
-        snake->isEating = true;
+    if (apple->getPosition() % (WIDTH*HEIGHT) == snake->getPosition().at(0)) {
+        snake->setEatingState(true);
     }
 }
 
@@ -31,10 +31,10 @@ void Environment::AddApple(Apple *apple, Snake *snake) {
 }
 
 int Environment::SpawnApple(Apple *apple) {
-    int applePos = apple->getApplePosition() % (WIDTH*HEIGHT); // Apple inside of the window
+    int applePos = apple->getPosition() % (WIDTH*HEIGHT); // Apple inside of the window
     while (window[applePos] != ' ') {
         apple->Respawn();
-        applePos = apple->getApplePosition() % (WIDTH*HEIGHT);
+        applePos = apple->getPosition() % (WIDTH*HEIGHT);
     }
     return applePos;
 }
@@ -74,7 +74,7 @@ void Environment::RefreshScreen(Snake *snake, Apple *apple) {
 
 
 bool Environment::PlayerOutOfBound(Snake *snake) {
-    if (window[snake->position.front()] == '*') {
+    if (window[snake->getPosition().front()] == '*') {
         return true;
     }
     if (snake->Die()) {
@@ -84,6 +84,6 @@ bool Environment::PlayerOutOfBound(Snake *snake) {
 }
 
 void Environment::ScoreBanner(Snake *snake) {
-    std::cout << "\n  Score : " << snake->size - 5 << std::endl;
+    std::cout << "\n  Score : " << snake->getSize() - 5 << std::endl;
 }   
 

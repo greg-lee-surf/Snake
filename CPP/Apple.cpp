@@ -3,13 +3,16 @@
 #include "Apple.hpp"
 
 Apple::Apple() {
-    applePosition = rand();
+    position = rand();
 }
 
 void Apple::Respawn() {
-    applePosition = rand();
+    position = rand();
 }
 
-int Apple::getApplePosition() {
-    return applePosition;
+int Apple::getPosition() {
+    return position;
+}
+void Apple::setPosition(int _position) {
+    position = _position;
 }
